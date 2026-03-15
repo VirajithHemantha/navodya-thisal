@@ -172,7 +172,7 @@ export default function WeddingInvitation() {
               <img src={mandalaImage} alt="Mandala" className="w-12 h-12 md:w-20 md:h-20 object-contain mix-blend-multiply mb-1 md:mb-2" />
 
               {/* Side Elephants */}
-              <div className="absolute inset-y-0 -left-12 sm:-left-10 md:-left-24 lg:-left-32 flex items-center z-0 pointer-events-none">
+              <div className="absolute inset-y-0 -left-4 sm:-left-10 md:-left-24 lg:-left-32 flex items-center z-0 pointer-events-none">
                 <motion.img
                   initial={{ x: -100, opacity: 0 }}
                   animate={{ x: 0, opacity: 0.6 }}
@@ -182,7 +182,7 @@ export default function WeddingInvitation() {
                   alt=""
                 />
               </div>
-              <div className="absolute inset-y-0 -right-12 sm:-right-10 md:-right-24 lg:-right-32 flex items-center z-0 pointer-events-none">
+              <div className="absolute inset-y-0 -right-4 sm:-right-10 md:-right-24 lg:-right-32 flex items-center z-0 pointer-events-none">
                 <motion.img
                   initial={{ x: 100, opacity: 0 }}
                   animate={{ x: 0, opacity: 0.6 }}
