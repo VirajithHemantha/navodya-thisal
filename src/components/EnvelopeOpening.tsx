@@ -1043,6 +1043,16 @@ export function EnvelopeOpening({ onComplete, onMusicStart }: { onComplete: () =
             font-size: 22px;
           }
 
+          .card-venue {
+            font-size: 11px;
+            line-height: 1.65;
+            letter-spacing: 0.08em;
+            max-width: 220px;
+            margin: 0 auto;
+            white-space: normal;
+            overflow-wrap: anywhere;
+          }
+
           .invitation-site {
             min-height: 560px;
             border-radius: 24px;
