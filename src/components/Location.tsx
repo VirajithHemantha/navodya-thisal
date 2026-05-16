@@ -1,18 +1,78 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { MapPin, Navigation, Compass, Map } from 'lucide-react';
 
-export const Location: React.FC = () => {
-  const venueAddress = "Senuri Grand Castello, Divulapitiya";
-  const mapUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15822.464624388344!2d80.0328!3d7.2289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNyAxMyczMy4wIk4gODDCsDAxJzU4LjEiRQ!5e0!3m2!1sen!2slk!4v1711000000000!5m2!1sen!2slk`;
-  const liveLocationUrl = "https://www.google.com/maps/search/Senuri+Grand+Castello+Divulapitiya";
+interface LocationProps {
+  event?: string | null;
+}
+
+export const Location: React.FC<LocationProps> = ({ event = 'both' }) => {
+  const [activeTab, setActiveTab] = useState<'church' | 'poruwa' | 'homecoming'>(
+    event === 'homecoming' ? 'homecoming' : 'church'
+  );
+
+  const currentTab = event === 'homecoming' ? 'homecoming' : activeTab;
+
+  let venueName = "Our Lady of Sorrows Church";
+  let venueCity = "Kandawala";
+  let venueQuote = `"A sacred and beautiful sanctuary where we will exchange our vows and receive God's blessings."`;
+  let liveLocationUrl = "https://maps.app.goo.gl/P5t6N4riM3VdLUui6";
+  let mapUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.604192138818!2d79.8804144!3d7.2861161!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2ee526b7a2d95%3A0x8e8b2b7b5b5b5b5b!2sOur%20Lady%20of%20Sorrows%20Church%2C%20Kandawala!5e0!3m2!1sen!2slk!4v1711000000002!5m2!1sen!2slk";
+
+  if (currentTab === 'poruwa') {
+    venueName = "Senuri Grand Castello";
+    venueCity = "Divulapitiya";
+    venueQuote = `"A serene and elegant setting where we will celebrate our wedding reception with joy and laughter."`;
+    liveLocationUrl = "https://maps.app.goo.gl/Hs11bevLcqMhV1od6";
+    mapUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15822.464624388344!2d80.0328!3d7.2289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNyAxMyczMy4wIk4gODDCsDAxJzU4LjEiRQ!5e0!3m2!1sen!2slk!4v1711000000000!5m2!1sen!2slk";
+  } else if (currentTab === 'homecoming') {
+    venueName = "Jetwing Blue";
+    venueCity = "Negombo";
+    venueQuote = `"A stunning beachside haven where we will celebrate our homecoming with joy and laughter."`;
+    liveLocationUrl = "https://maps.app.goo.gl/CpekF7beA5xdpYRS6";
+    mapUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.810555020817!2d79.8386111!3d7.2344444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2ee9c7a28e7d3%3A0x13c121e7d82a176!2sJetwing%20Blue!5e0!3m2!1sen!2slk!4v1711000000001!5m2!1sen!2slk";
+  }
 
   return (
     <div className="max-w-[85rem] mx-auto px-6 relative py-12">
       {/* Decorative Glows */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-radial from-brand-beige/20 to-transparent blur-3xl pointer-events-none -z-10" />
 
-      <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-0 mt-10">
+      {/* Tab toggle */}
+      {event !== 'homecoming' && (
+        <div className="flex justify-center mb-12 relative z-20">
+          <div className="bg-white/90 backdrop-blur-md p-1.5 rounded-full border border-brand-beige/40 shadow-lg flex flex-wrap justify-center gap-1 sm:gap-2">
+            <button
+              onClick={() => setActiveTab('church')}
+              className={`px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-sans text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all ${
+                currentTab === 'church' ? 'bg-brand-beige-deep text-white shadow-md' : 'text-stone-600 hover:text-stone-900'
+              }`}
+            >
+              Church Ceremony
+            </button>
+            <button
+              onClick={() => setActiveTab('poruwa')}
+              className={`px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-sans text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all ${
+                currentTab === 'poruwa' ? 'bg-brand-beige-deep text-white shadow-md' : 'text-stone-600 hover:text-stone-900'
+              }`}
+            >
+              Poruwa Ceremony & Reception Function
+            </button>
+            {event === 'both' && (
+              <button
+                onClick={() => setActiveTab('homecoming')}
+                className={`px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-sans text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all ${
+                  currentTab === 'homecoming' ? 'bg-brand-beige-deep text-white shadow-md' : 'text-stone-600 hover:text-stone-900'
+                }`}
+              >
+                Homecoming Function
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
+      <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-0 mt-4">
         
         {/* Left Interactive Card */}
         <motion.div 
@@ -40,29 +100,38 @@ export const Location: React.FC = () => {
                 <span className="italic font-light text-brand-beige-deep">Celebrate</span>
               </h2>
 
-              <div className="flex items-start gap-5 mt-10">
-                <div className="w-12 h-12 bg-stone-50 rounded-full border border-brand-beige/40 shadow-inner flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500">
-                  <MapPin className="text-brand-beige-deep w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-2xl font-serif text-stone-800 mb-1">Senuri Grand Castello</p>
-                  <p className="text-[11px] uppercase tracking-[0.2em] font-medium text-stone-400 leading-relaxed mb-6">Divulapitiya</p>
-                  
-                  <p className="text-stone-500/90 italic font-serif text-lg leading-relaxed max-w-sm mb-10 pl-4 border-l-[1.5px] border-brand-beige/40">
-                    "A serene and elegant setting where we will begin our new chapter together."
-                  </p>
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={venueName}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.4 }}
+                  className="flex items-start gap-5 mt-10"
+                >
+                  <div className="w-12 h-12 bg-stone-50 rounded-full border border-brand-beige/40 shadow-inner flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500">
+                    <MapPin className="text-brand-beige-deep w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-serif text-stone-800 mb-1">{venueName}</p>
+                    <p className="text-[11px] uppercase tracking-[0.2em] font-medium text-stone-400 leading-relaxed mb-6">{venueCity}</p>
+                    
+                    <p className="text-stone-500/90 italic font-serif text-lg leading-relaxed max-w-sm mb-10 pl-4 border-l-[1.5px] border-brand-beige/40">
+                      {venueQuote}
+                    </p>
 
-                  <a
-                    href={liveLocationUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 bg-stone-800 text-brand-champagne px-8 py-4 rounded-full font-sans tracking-[0.2em] text-xs uppercase hover:bg-stone-900 hover:shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-all duration-300 active:scale-95 group/btn"
-                  >
-                    <Navigation className="w-4 h-4 text-brand-gold group-hover/btn:rotate-45 transition-transform duration-300" />
-                    Open Live Location
-                  </a>
-                </div>
-              </div>
+                    <a
+                      href={liveLocationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-3 bg-stone-800 text-brand-champagne px-8 py-4 rounded-full font-sans tracking-[0.2em] text-xs uppercase hover:bg-stone-900 hover:shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-all duration-300 active:scale-95 group/btn"
+                    >
+                      <Navigation className="w-4 h-4 text-brand-gold group-hover/btn:rotate-45 transition-transform duration-300" />
+                      Open Live Location
+                    </a>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* Faint background compass icon */}
@@ -84,17 +153,24 @@ export const Location: React.FC = () => {
             {/* Map Placeholder Masking for premium feel */}
             <div className="absolute inset-0 bg-brand-beige/10 mix-blend-multiply pointer-events-none z-20 group-hover/map:opacity-0 transition-opacity duration-1000" />
             
-            <iframe
-              title="Senuri Grand Castello Location"
-              src={mapUrl}
-              width="100%"
-              height="100%"
-              style={{ border: 0, filter: 'contrast(1.1) saturate(1.2)' }}
-              allowFullScreen={true}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="absolute inset-0 w-full h-full object-cover grayscale-[30%] group-hover/map:grayscale-0 transition-all duration-1000 ease-in-out"
-            />
+            <AnimatePresence mode="wait">
+              <motion.iframe
+                key={mapUrl}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6 }}
+                title={`${venueName} Location`}
+                src={mapUrl}
+                width="100%"
+                height="100%"
+                style={{ border: 0, filter: 'contrast(1.1) saturate(1.2)' }}
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="absolute inset-0 w-full h-full object-cover grayscale-[30%] group-hover/map:grayscale-0 transition-all duration-1000 ease-in-out"
+              />
+            </AnimatePresence>
 
             {/* Decorative Location Pin Overlay */}
             <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full border border-brand-beige/30 shadow-lg flex items-center gap-2 pointer-events-none z-30">

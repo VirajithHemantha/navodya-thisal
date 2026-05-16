@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle, Loader2, Heart, Sparkles } from 'lucide-react';
 
-export const RSVPForm: React.FC = () => {
+interface RSVPFormProps {
+  inviteeName?: string;
+  eventName?: string;
+}
+
+export const RSVPForm: React.FC<RSVPFormProps> = ({ inviteeName = '', eventName = 'the celebration' }) => {
   const [formData, setFormData] = useState({
-    fullName: '',
+    fullName: inviteeName,
     guests: '1',
     dietaryNotes: '',
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  useEffect(() => {
+    if (inviteeName) {
+      setFormData(prev => ({ ...prev, fullName: inviteeName }));
+    }
+  }, [inviteeName]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,7 +30,7 @@ export const RSVPForm: React.FC = () => {
       await new Promise(resolve => setTimeout(resolve, 800));
 
       setStatus('success');
-      setFormData({ fullName: '', guests: '1', dietaryNotes: '' });
+      setFormData({ fullName: inviteeName, guests: '1', dietaryNotes: '' });
     } catch (error) {
       console.error('Error sending RSVP: ', error);
       setStatus('error');
@@ -31,7 +42,7 @@ export const RSVPForm: React.FC = () => {
       {/* Premium ambient backdrop & glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-radial from-brand-beige/15 to-transparent rounded-full blur-[100px] pointer-events-none -z-10" />
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -40,11 +51,11 @@ export const RSVPForm: React.FC = () => {
       >
         {/* Soft top border line */}
         <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-brand-champagne via-brand-beige-deep/80 to-brand-champagne" />
-        
+
         {/* Left Side: Elegant Text */}
         <div className="lg:w-1/2 lg:pr-10 mb-12 lg:mb-0 relative text-center lg:text-left">
           <Sparkles className="absolute -top-6 -left-6 w-12 h-12 text-brand-beige/30 animate-pulse" />
-          
+
           <div className="inline-flex items-center justify-center lg:justify-start gap-4 mb-6">
             <span className="text-brand-beige-deep uppercase tracking-[0.5em] text-[10px] sm:text-[11px] font-bold drop-shadow-sm">
               Kindly Respond
@@ -55,15 +66,13 @@ export const RSVPForm: React.FC = () => {
           <h2 className="text-5xl sm:text-6xl font-display text-stone-800 tracking-tight leading-[1.1] mb-6 drop-shadow-sm">
             Reserve <span className="italic font-light text-brand-beige-deep">Your</span> Seat
           </h2>
-          
+
           <p className="text-stone-500/90 font-serif text-lg leading-relaxed mb-6">
-            Your presence means the world to us. Please kindly let us know if you will be able to join our celebration.
+            {inviteeName
+              ? `Dear ${inviteeName}, your presence at ${eventName} means the world to us. Please kindly let us know if you will be able to join our celebration.`
+              : `Your presence means the world to us. Please kindly let us know if you will be able to join our celebration.`
+            }
           </p>
-          <div className="mt-4 mb-6 bg-brand-champagne/50 px-6 py-4 rounded-2xl border border-brand-beige/20">
-            <p className="text-stone-600 font-sans text-sm font-medium">RSVP Contact</p>
-            <p className="text-stone-800 font-serif text-lg mt-1">Suresh Shanaka</p>
-            <a href="tel:+94776341985" className="text-brand-beige-deep font-sans text-base font-semibold hover:underline">+94 776341985</a>
-          </div>
           <div className="w-12 h-[1px] bg-brand-beige/50 mx-auto lg:mx-0" />
         </div>
 

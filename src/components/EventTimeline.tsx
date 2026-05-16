@@ -3,32 +3,25 @@ import { Heart, MapPin, Utensils, Sparkles, Clock } from 'lucide-react';
 
 const events = [
   {
-    time: '3.30 PM',
-    title: 'Wedding Ceremony',
-    description: 'The sacred sacrament of holy matrimony at St. Antony\'s Church, Kongodamulla, Katana.',
+    time: '8.00 AM',
+    title: 'Church Ceremony',
+    description: 'The Mass will commence at Our Lady of Sorrows Church, Kandawala.',
     icon: Heart,
     color: 'from-rose-400 to-rose-500'
   },
   {
-    time: '6.30 PM',
-    title: 'Arrival & Welcome',
-    description: 'Guests gather at Senuri Grand Castello, Divulapitiya for drinks and a warm welcome.',
+    time: '11.04 AM',
+    title: 'Poruwa Ceremony & Reception Function',
+    description: 'Poruwa Ceremony commences at 11.04 am, followed by the reception at Senuri Grand Castello, Divulapitiya.',
     icon: MapPin,
     color: 'from-blue-500 to-blue-600'
   },
   {
-    time: '7.00 PM',
-    title: 'Wedding Reception',
-    description: 'A grand celebration to honor our love, complete with dinner, music, and joyful dancing.',
+    time: 'July 24, 7.00 PM',
+    title: 'Homecoming Function',
+    description: 'Evening celebration and dinner at Jetwing Blue, Negombo.',
     icon: Utensils,
     color: 'from-amber-400 to-amber-500'
-  },
-  {
-    time: '11.30 PM',
-    title: 'Farewell',
-    description: 'Thank you for joining us as we begin our beautiful journey together.',
-    icon: Sparkles,
-    color: 'from-purple-400 to-purple-500'
   },
 ];
 

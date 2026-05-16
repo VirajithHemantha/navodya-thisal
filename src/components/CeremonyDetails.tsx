@@ -2,7 +2,13 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Clock, Calendar, MapPin, Heart, Sparkles } from 'lucide-react';
 
-export const CeremonyDetails: React.FC = () => {
+interface CeremonyDetailsProps {
+  event?: string | null;
+}
+
+export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both' }) => {
+  const isHomecoming = event === 'homecoming';
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
       {/* Premium ambient backdrop */}
@@ -19,18 +25,24 @@ export const CeremonyDetails: React.FC = () => {
           >
             <div className="inline-flex items-center gap-4 mb-6">
               <span className="text-brand-beige-deep uppercase tracking-[0.4em] sm:tracking-[0.5em] text-[10px] sm:text-[11px] font-bold drop-shadow-sm">
-                The Sacred Union
+                {isHomecoming ? 'The Homecoming' : 'The Sacred Union'}
               </span>
               <div className="w-12 sm:w-20 h-[1px] bg-gradient-to-r from-brand-beige-deep/60 to-transparent" />
             </div>
             
             <h2 className="text-5xl sm:text-6xl lg:text-7xl font-display text-stone-800 mb-8 leading-[1.1] drop-shadow-sm">
-              A Celebration of <br />
-              <span className="italic font-light text-brand-beige-deep">Tradition & Love</span>
+              {isHomecoming ? (
+                <>A Celebration of <br /><span className="italic font-light text-brand-beige-deep">Love & Family</span></>
+              ) : (
+                <>A Celebration of <br /><span className="italic font-light text-brand-beige-deep">Tradition & Love</span></>
+              )}
             </h2>
             
             <p className="text-stone-500/90 font-serif text-lg sm:text-xl leading-relaxed mb-16 max-w-lg">
-              We are honored to invite you to witness our union as we exchange vows at St. Antony's Church, surrounded by the grace of God and the warmth of our loved ones.
+              {isHomecoming 
+                ? 'We are honored to invite you to our Homecoming Function at Jetwing Blue, Negombo, as we celebrate the beginning of our new life together surrounded by the warmth of our loved ones.'
+                : 'We are honored to invite you to witness our union as we exchange vows at Our Lady of Sorrows Church, Kandawala, surrounded by the grace of God and the warmth of our loved ones.'
+              }
             </p>
 
             {/* Premium Timeline */}
@@ -42,7 +54,9 @@ export const CeremonyDetails: React.FC = () => {
                   <Calendar className="w-5 h-5 text-brand-beige-deep group-hover:scale-110 transition-transform duration-500" />
                 </div>
                 <div>
-                  <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-2 group-hover:text-brand-beige-deep transition-colors duration-500">Saturday, September 19</h4>
+                  <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-2 group-hover:text-brand-beige-deep transition-colors duration-500">
+                    {isHomecoming ? 'Friday, July 24' : 'Wednesday, July 22'}
+                  </h4>
                   <p className="text-stone-500/80 text-[10px] sm:text-[11px] uppercase tracking-[0.3em] font-bold">The Year Two Thousand Twenty Six</p>
                 </div>
               </div>
@@ -53,8 +67,12 @@ export const CeremonyDetails: React.FC = () => {
                   <Clock className="w-5 h-5 text-brand-beige-deep group-hover:scale-110 transition-transform duration-500" />
                 </div>
                 <div>
-                  <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-2 group-hover:text-brand-beige-deep transition-colors duration-500">03:30 PM</h4>
-                  <p className="text-stone-500/80 text-[10px] sm:text-[11px] uppercase tracking-[0.3em] font-bold">Wedding Ceremony — St. Antony's Church, Kongodamulla, Katana</p>
+                  <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-2 group-hover:text-brand-beige-deep transition-colors duration-500">
+                    {isHomecoming ? '07:00 PM Onwards' : '08:00 AM'}
+                  </h4>
+                  <p className="text-stone-500/80 text-[10px] sm:text-[11px] uppercase tracking-[0.3em] font-bold">
+                    {isHomecoming ? 'Homecoming Celebration — Jetwing Blue, Negombo' : 'Church Ceremony — Our Lady of Sorrows Church, Kandawala'}
+                  </p>
                 </div>
               </div>
 
@@ -64,8 +82,12 @@ export const CeremonyDetails: React.FC = () => {
                   <MapPin className="w-5 h-5 text-brand-beige-deep group-hover:scale-110 transition-transform duration-500" />
                 </div>
                 <div>
-                  <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-2 group-hover:text-brand-beige-deep transition-colors duration-500">Senuri Grand Castello</h4>
-                  <p className="text-stone-500/80 text-[10px] sm:text-[11px] uppercase tracking-[0.3em] font-bold">Divulapitiya</p>
+                  <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-2 group-hover:text-brand-beige-deep transition-colors duration-500">
+                    {isHomecoming ? 'Jetwing Blue' : 'Senuri Grand Castello'}
+                  </h4>
+                  <p className="text-stone-500/80 text-[10px] sm:text-[11px] uppercase tracking-[0.3em] font-bold">
+                    {isHomecoming ? 'Negombo' : 'Divulapitiya'}
+                  </p>
                 </div>
               </div>
             </div>
@@ -88,7 +110,7 @@ export const CeremonyDetails: React.FC = () => {
             {/* Main Creative Image Frame */}
             <div className="relative aspect-[3/4] sm:aspect-[4/5] rounded-[2rem] sm:rounded-[3rem] overflow-hidden border-[6px] sm:border-[8px] border-white shadow-[0_20px_50px_rgba(176,137,104,0.2)] bg-white group">
               <img
-                src="/IMG_6941.JPG.jpeg"
+                src={isHomecoming ? "/IMG_6942.JPG.jpeg" : "/IMG_6941.JPG.jpeg"}
                 onError={(e) => { 
                   e.currentTarget.src = "https://images.unsplash.com/photo-1519225421980-715cb02151ff?auto=format&fit=crop&q=80&w=800&h=1000"; 
                   e.currentTarget.onerror = null; 
@@ -104,31 +126,62 @@ export const CeremonyDetails: React.FC = () => {
             <div className="absolute -top-2 -right-2 w-16 sm:w-24 h-16 sm:h-24 rounded-full border-[1.5px] border-brand-beige/20" />
           </motion.div>
 
-          {/* Reception Card — Placed Below Image */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6, duration: 1, ease: "easeOut" }}
-            className="mt-10 sm:mt-14 bg-white/85 backdrop-blur-xl p-6 sm:p-10 shadow-[0_30px_60px_rgba(176,137,104,0.15)] rounded-2xl border border-white relative overflow-hidden"
-          >
-            <div className="absolute inset-x-8 -top-px h-[2px] bg-gradient-to-r from-transparent via-brand-beige-deep/60 to-transparent" />
-            <div className="relative flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
-              <div className="flex items-center gap-3">
-                <Heart className="text-brand-beige-deep w-8 h-8 sm:w-10 sm:h-10 fill-brand-beige/20 drop-shadow-sm flex-shrink-0" />
-                <Sparkles className="w-4 h-4 text-brand-gold animate-pulse flex-shrink-0" />
+          {/* Event Card — Placed Below Image */}
+          {!isHomecoming && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6, duration: 1, ease: "easeOut" }}
+              className="mt-10 sm:mt-14 bg-white/85 backdrop-blur-xl p-6 sm:p-10 shadow-[0_30px_60px_rgba(176,137,104,0.15)] rounded-2xl border border-white relative overflow-hidden"
+            >
+              <div className="absolute inset-x-8 -top-px h-[2px] bg-gradient-to-r from-transparent via-brand-beige-deep/60 to-transparent" />
+              <div className="relative flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
+                <div className="flex items-center gap-3">
+                  <Heart className="text-brand-beige-deep w-8 h-8 sm:w-10 sm:h-10 fill-brand-beige/20 drop-shadow-sm flex-shrink-0" />
+                  <Sparkles className="w-4 h-4 text-brand-gold animate-pulse flex-shrink-0" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-display text-2xl sm:text-4xl text-stone-800 mb-1 sm:mb-2 tracking-tight">Poruwa Ceremony & Reception Function</h4>
+                  <p className="text-stone-500/90 font-serif text-sm sm:text-base leading-relaxed">
+                    Poruwa Ceremony commences at 11.04 am, followed by the reception at Senuri Grand Castello, Divulapitiya.
+                  </p>
+                </div>
+                <div className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-brand-champagne rounded-full border border-brand-beige/30 shadow-sm self-start sm:self-center flex-shrink-0">
+                  <span className="text-brand-beige-deep font-sans font-bold tracking-[0.1em] sm:tracking-[0.2em] text-[9px] sm:text-[11px] uppercase block drop-shadow-sm">11:04 AM Onwards</span>
+                </div>
               </div>
-              <div className="flex-1">
-                <h4 className="font-display text-2xl sm:text-4xl text-stone-800 mb-1 sm:mb-2 tracking-tight">The Reception</h4>
-                <p className="text-stone-500/90 font-serif text-sm sm:text-base leading-relaxed">
-                  Followed by a grand celebratory dinner and evening festivities at Senuri Grand Castello.
-                </p>
+            </motion.div>
+          )}
+
+          {/* Homecoming Card for 'homecoming' or 'both' */}
+          {(isHomecoming || event === 'both') && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: isHomecoming ? 0.6 : 0.8, duration: 1, ease: "easeOut" }}
+              className="mt-6 sm:mt-10 bg-white/85 backdrop-blur-xl p-6 sm:p-10 shadow-[0_30px_60px_rgba(176,137,104,0.15)] rounded-2xl border border-white relative overflow-hidden"
+            >
+              <div className="absolute inset-x-8 -top-px h-[2px] bg-gradient-to-r from-transparent via-brand-beige-deep/60 to-transparent" />
+              <div className="relative flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
+                <div className="flex items-center gap-3">
+                  <Heart className="text-brand-beige-deep w-8 h-8 sm:w-10 sm:h-10 fill-brand-beige/20 drop-shadow-sm flex-shrink-0" />
+                  <Sparkles className="w-4 h-4 text-brand-gold animate-pulse flex-shrink-0" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-display text-2xl sm:text-4xl text-stone-800 mb-1 sm:mb-2 tracking-tight">Homecoming Function</h4>
+                  <p className="text-stone-500/90 font-serif text-sm sm:text-base leading-relaxed">
+                    Join us on July 24, 2026, for an elegant evening of celebration at Jetwing Blue, Negombo.
+                  </p>
+                </div>
+                <div className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-brand-champagne rounded-full border border-brand-beige/30 shadow-sm self-start sm:self-center flex-shrink-0">
+                  <span className="text-brand-beige-deep font-sans font-bold tracking-[0.1em] sm:tracking-[0.2em] text-[9px] sm:text-[11px] uppercase block drop-shadow-sm">7:00 PM Onwards</span>
+                </div>
               </div>
-              <div className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-brand-champagne rounded-full border border-brand-beige/30 shadow-sm self-start sm:self-center flex-shrink-0">
-                <span className="text-brand-beige-deep font-sans font-bold tracking-[0.1em] sm:tracking-[0.2em] text-[9px] sm:text-[11px] uppercase block drop-shadow-sm">7:00 PM Onwards</span>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          )}
+
         </div>
       </div>
     </div>

@@ -9,18 +9,42 @@ import { CoupleDetails } from './components/CoupleDetails';
 import { CeremonyDetails } from './components/CeremonyDetails';
 import { Location } from './components/Location';
 import { Timeline } from './components/Timeline';
-import { Gallery } from './components/Gallery';
 import { Countdown } from './components/Countdown';
 import { RSVPForm } from './components/RSVPForm';
 import { WishesSection } from './components/WishesSection';
+import { Admin } from './components/Admin';
+import { InviteeBanner } from './components/InviteeBanner';
 
 export default function App() {
   const [showInvitation, setShowInvitation] = useState(false);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  // Check for Admin route
+  if (window.location.pathname === '/admin') {
+    return (
+      <>
+        <Toaster position="top-center" />
+        <Admin />
+      </>
+    );
+  }
+
+  // Parse Invitation URL Parameters
+  const params = new URLSearchParams(window.location.search);
+  const titleParam = params.get('title') || '';
+  const nameParam = params.get('name') || '';
+  const eventParam = params.get('event') || 'both'; // 'poruwa', 'homecoming', 'both'
+
+  const fullInviteeName = `${titleParam} ${nameParam}`.trim();
+
+  let eventLabel = 'Our Wedding Celebrations';
+  if (eventParam === 'poruwa') eventLabel = 'Poruwa Ceremony & Reception Function';
+  if (eventParam === 'homecoming') eventLabel = 'Homecoming Function';
+  if (eventParam === 'both') eventLabel = 'Wedding & Homecoming Celebrations';
+
   useEffect(() => {
-    audioRef.current = new Audio('/paulyudin-wedding-485932.mp3');
+    audioRef.current = new Audio('/Austin Giorgio - Moon (Official Video) (mp3cut.net).mp3');
     audioRef.current.loop = true;
     audioRef.current.volume = 0.3;
     audioRef.current.preload = 'auto';
@@ -56,12 +80,15 @@ export default function App() {
       <EnvelopeOpening
         onComplete={() => setShowInvitation(true)}
         onMusicStart={handleMusicStart}
+        event={eventParam}
       />
     );
   }
 
-  // Set the wedding date for the countdown
-  const weddingDate = new Date("2026-09-19T15:30:00");
+  // Set the wedding date for the countdown based on event type
+  const weddingDate = eventParam === 'homecoming'
+    ? new Date("2026-07-24T19:00:00")
+    : new Date("2026-07-22T08:00:00");
 
   return (
     <div className="font-sans text-stone-800 bg-brand-ivory overflow-hidden selection:bg-brand-beige-deep/20">
@@ -78,29 +105,29 @@ export default function App() {
         {isMusicPlaying ? <Music className="w-5 h-5 sm:w-6 sm:h-6" /> : <VolumeX className="w-5 h-5 sm:w-6 sm:h-6" />}
       </motion.button>
 
-      <Hero />
+      <Hero event={eventParam} />
       
+      {fullInviteeName && (
+        <InviteeBanner inviteeName={fullInviteeName} eventLabel={eventLabel} />
+      )}
+
       <div className="py-24 sm:py-32 bg-gradient-to-b from-brand-ivory via-white to-brand-ivory relative">
         <CoupleDetails />
       </div>
 
       <div className="py-24 sm:py-32 bg-white relative">
-        <CeremonyDetails />
+        <CeremonyDetails event={eventParam} />
       </div>
 
       <div className="py-24 sm:py-32 bg-gradient-to-b from-white via-brand-champagne/30 to-brand-ivory relative">
-        <Location />
+        <Location event={eventParam} />
       </div>
 
       <div className="py-24 sm:py-32 bg-brand-ivory relative">
-        <Timeline />
+        <Timeline event={eventParam} />
       </div>
 
-      <div className="py-24 sm:py-32 bg-white relative">
-        <Gallery />
-      </div>
-
-      <div className="py-24 sm:py-32 bg-gradient-to-b from-white to-brand-ivory relative">
+      <div className="py-24 sm:py-32 bg-gradient-to-b from-brand-ivory via-white to-brand-ivory relative">
           <div className="max-w-6xl mx-auto px-6 mb-16 text-center">
             <span className="text-brand-beige-deep uppercase tracking-[0.4em] text-[10px] sm:text-[11px] font-bold drop-shadow-sm">
               The Wait Is Almost Over
@@ -110,7 +137,7 @@ export default function App() {
       </div>
 
       <div className="py-24 sm:py-32 bg-brand-ivory relative">
-        <RSVPForm />
+        <RSVPForm inviteeName={fullInviteeName} eventName={eventLabel} />
       </div>
 
       <div className="py-24 sm:py-32 bg-gradient-to-b from-brand-ivory to-white relative mt-10">
@@ -121,9 +148,9 @@ export default function App() {
       <footer className="py-12 bg-white border-t border-brand-beige/20 text-center relative overflow-hidden mt-10">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-brand-beige/10 blur-[80px] rounded-full pointer-events-none" />
         <Heart className="w-6 h-6 mx-auto mb-6 text-brand-beige-deep fill-brand-beige/20" />
-        <p className="font-display text-4xl sm:text-5xl text-stone-800 mb-2">Samadhi & Madhawa</p>
+        <p className="font-display text-4xl sm:text-5xl text-stone-800 mb-2">Navodya & Thisal</p>
         <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.4em] font-sans text-stone-400 font-semibold block mb-8">
-          September 19, 2026
+          July 22, 2026
         </span>
 
       </footer>

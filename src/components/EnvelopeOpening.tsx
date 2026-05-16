@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 
-export function EnvelopeOpening({ onComplete, onMusicStart }: { onComplete: () => void, onMusicStart?: () => void }) {
+export function EnvelopeOpening({ onComplete, onMusicStart, event = 'both' }: { onComplete: () => void, onMusicStart?: () => void, event?: string | null }) {
   const [opened, setOpened] = useState(false);
 
   useEffect(() => {
     if (opened) {
-      if (onMusicStart) onMusicStart();
       const timer = setTimeout(() => {
         onComplete();
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [opened, onComplete, onMusicStart]);
+  }, [opened, onComplete]);
 
   return (
     <>
@@ -368,7 +367,10 @@ export function EnvelopeOpening({ onComplete, onMusicStart }: { onComplete: () =
         <div
           className={`envelope-container ${opened ? 'is-open' : ''}`}
           onClick={() => {
-            if (!opened) setOpened(true);
+            if (!opened) {
+              setOpened(true);
+              if (onMusicStart) onMusicStart();
+            }
           }}
         >
           {/* Base shadow behind the card */}
@@ -416,9 +418,9 @@ export function EnvelopeOpening({ onComplete, onMusicStart }: { onComplete: () =
               </div>
 
               <h1 className="text-names">
-                Samadhi
+                Navodya
                 <span className="text-ampersand">&</span>
-                Madhawa
+                Thisal
               </h1>
 
               <div className="divider">
@@ -429,9 +431,19 @@ export function EnvelopeOpening({ onComplete, onMusicStart }: { onComplete: () =
 
               <div className="text-details">
                 Request the honour of your presence<br />
-                <span className="text-date">Saturday 19 September 2026 At 3:30 PM</span>
-                <span className="text-church">St. Antony's Church</span><br />
-                Kongodamulla, Katana
+                {event === 'homecoming' ? (
+                  <>
+                    <span className="text-date">Friday 24 July 2026 At 7:00 PM</span>
+                    <span className="text-church">Jetwing Blue</span><br />
+                    Negombo
+                  </>
+                ) : (
+                  <>
+                    <span className="text-date">Wednesday 22 July 2026 At 8:00 AM</span>
+                    <span className="text-church">Our Lady of Sorrows Church</span><br />
+                    Kandawala
+                  </>
+                )}
               </div>
             </div>
           </div>
