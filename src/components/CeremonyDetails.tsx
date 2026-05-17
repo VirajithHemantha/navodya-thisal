@@ -13,7 +13,7 @@ export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both'
     <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
       {/* Premium ambient backdrop */}
       <div className="absolute top-0 right-0 w-[80%] h-[80%] bg-gradient-radial from-brand-beige/10 to-transparent rounded-full blur-[120px] pointer-events-none" />
-      
+
       <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
         {/* Left Side: Text Content */}
         <div className="lg:w-1/2 relative z-10 w-full">
@@ -24,12 +24,12 @@ export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both'
             transition={{ duration: 1.2, ease: "easeOut" }}
           >
             <div className="inline-flex items-center gap-4 mb-6">
-              <span className="text-brand-beige-deep uppercase tracking-[0.4em] sm:tracking-[0.5em] text-[10px] sm:text-[11px] font-bold drop-shadow-sm">
+              <span className="text-brand-beige-deep uppercase tracking-[0.4em] sm:tracking-[0.5em] text-[11px] sm:text-xs font-bold drop-shadow-sm">
                 {isHomecoming ? 'The Homecoming' : 'The Sacred Union'}
               </span>
               <div className="w-12 sm:w-20 h-[1px] bg-gradient-to-r from-brand-beige-deep/60 to-transparent" />
             </div>
-            
+
             <h2 className="text-5xl sm:text-6xl lg:text-7xl font-display text-stone-800 mb-8 leading-[1.1] drop-shadow-sm">
               {isHomecoming ? (
                 <>A Celebration of <br /><span className="italic font-light text-brand-beige-deep">Love & Family</span></>
@@ -37,9 +37,9 @@ export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both'
                 <>A Celebration of <br /><span className="italic font-light text-brand-beige-deep">Tradition & Love</span></>
               )}
             </h2>
-            
+
             <p className="text-stone-500/90 font-serif text-lg sm:text-xl leading-relaxed mb-16 max-w-lg">
-              {isHomecoming 
+              {isHomecoming
                 ? 'We are honored to invite you to our Homecoming Function at Jetwing Blue, Negombo, as we celebrate the beginning of our new life together surrounded by the warmth of our loved ones.'
                 : 'We are honored to invite you to witness our union as we exchange vows at Our Lady of Sorrows Church, Kandawala, surrounded by the grace of God and the warmth of our loved ones.'
               }
@@ -47,7 +47,7 @@ export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both'
 
             {/* Premium Timeline */}
             <div className="relative space-y-12 ml-10 sm:ml-12 border-l-[1.5px] border-brand-beige/30 pl-10 sm:pl-12 py-4">
-              
+
               {/* Calendar */}
               <div className="relative group">
                 <div className="absolute top-1/2 -translate-y-1/2 -left-[64px] sm:-left-[74px] w-12 h-12 bg-white rounded-full border border-brand-beige/40 shadow-lg flex items-center justify-center group-hover:border-brand-beige-deep group-hover:shadow-[0_4px_15px_rgba(176,137,104,0.3)] transition-all duration-500">
@@ -55,41 +55,107 @@ export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both'
                 </div>
                 <div>
                   <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-2 group-hover:text-brand-beige-deep transition-colors duration-500">
-                    {isHomecoming ? 'Friday, July 24' : 'Wednesday, July 22'}
+                    {isHomecoming ? 'Date: 24-07-2026' : 'Date: 22-07-2026'}
                   </h4>
-                  <p className="text-stone-500/80 text-[10px] sm:text-[11px] uppercase tracking-[0.3em] font-bold">The Year Two Thousand Twenty Six</p>
-                </div>
-              </div>
-
-              {/* Clock */}
-              <div className="relative group">
-                <div className="absolute top-1/2 -translate-y-1/2 -left-[64px] sm:-left-[74px] w-12 h-12 bg-white rounded-full border border-brand-beige/40 shadow-lg flex items-center justify-center group-hover:border-brand-beige-deep group-hover:shadow-[0_4px_15px_rgba(176,137,104,0.3)] transition-all duration-500">
-                  <Clock className="w-5 h-5 text-brand-beige-deep group-hover:scale-110 transition-transform duration-500" />
-                </div>
-                <div>
-                  <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-2 group-hover:text-brand-beige-deep transition-colors duration-500">
-                    {isHomecoming ? '07:00 PM Onwards' : '08:00 AM'}
-                  </h4>
-                  <p className="text-stone-500/80 text-[10px] sm:text-[11px] uppercase tracking-[0.3em] font-bold">
-                    {isHomecoming ? 'Homecoming Celebration — Jetwing Blue, Negombo' : 'Church Ceremony — Our Lady of Sorrows Church, Kandawala'}
+                  <p className="text-stone-500/80 text-[11px] sm:text-xs uppercase tracking-[0.3em] font-bold">
+                    Event Timeline
                   </p>
                 </div>
               </div>
 
-              {/* Location */}
-              <div className="relative group">
-                <div className="absolute top-1/2 -translate-y-1/2 -left-[64px] sm:-left-[74px] w-12 h-12 bg-white rounded-full border border-brand-beige/40 shadow-lg flex items-center justify-center group-hover:border-brand-beige-deep group-hover:shadow-[0_4px_15px_rgba(176,137,104,0.3)] transition-all duration-500">
-                  <MapPin className="w-5 h-5 text-brand-beige-deep group-hover:scale-110 transition-transform duration-500" />
-                </div>
-                <div>
-                  <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-2 group-hover:text-brand-beige-deep transition-colors duration-500">
-                    {isHomecoming ? 'Jetwing Blue' : 'Senuri Grand Castello'}
-                  </h4>
-                  <p className="text-stone-500/80 text-[10px] sm:text-[11px] uppercase tracking-[0.3em] font-bold">
-                    {isHomecoming ? 'Negombo' : 'Divulapitiya'}
-                  </p>
-                </div>
-              </div>
+              {isHomecoming ? (
+                <>
+                  {/* Homecoming Function */}
+                  <div className="relative group">
+                    <div className="absolute top-1/2 -translate-y-1/2 -left-[64px] sm:-left-[74px] w-12 h-12 bg-white rounded-full border border-brand-beige/40 shadow-lg flex items-center justify-center group-hover:border-brand-beige-deep group-hover:shadow-[0_4px_15px_rgba(176,137,104,0.3)] transition-all duration-500">
+                      <Clock className="w-5 h-5 text-brand-beige-deep group-hover:scale-110 transition-transform duration-500" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-2 group-hover:text-brand-beige-deep transition-colors duration-500">
+                        Homecoming Function
+                      </h4>
+                      <p className="text-stone-600/90 text-base sm:text-lg font-serif mb-1">
+                        <span className="font-bold">Time:</span> 7pm onwards
+                      </p>
+                      <p className="text-stone-600/90 text-base sm:text-lg font-serif">
+                        <span className="font-bold">Venue:</span> Jetwing Blue, Negombo
+                      </p>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Church Ceremony */}
+                  <div className="relative group">
+                    <div className="absolute top-1/2 -translate-y-1/2 -left-[64px] sm:-left-[74px] w-12 h-12 bg-white rounded-full border border-brand-beige/40 shadow-lg flex items-center justify-center group-hover:border-brand-beige-deep group-hover:shadow-[0_4px_15px_rgba(176,137,104,0.3)] transition-all duration-500">
+                      <Clock className="w-5 h-5 text-brand-beige-deep group-hover:scale-110 transition-transform duration-500" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-2 group-hover:text-brand-beige-deep transition-colors duration-500">
+                        Church Ceremony
+                      </h4>
+                      <p className="text-stone-600/90 text-base sm:text-lg font-serif mb-1">
+                        <span className="font-bold">Time:</span> The Mass will commence at 8.00 am
+                      </p>
+                      <p className="text-stone-600/90 text-base sm:text-lg font-serif">
+                        <span className="font-bold">Venue:</span> Our Lady of Sorrows Church, Kandawala
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Poruwa Ceremony & Reception */}
+                  <div className="relative group">
+                    <div className="absolute top-1/2 -translate-y-1/2 -left-[64px] sm:-left-[74px] w-12 h-12 bg-white rounded-full border border-brand-beige/40 shadow-lg flex items-center justify-center group-hover:border-brand-beige-deep group-hover:shadow-[0_4px_15px_rgba(176,137,104,0.3)] transition-all duration-500">
+                      <MapPin className="w-5 h-5 text-brand-beige-deep group-hover:scale-110 transition-transform duration-500" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-2 group-hover:text-brand-beige-deep transition-colors duration-500">
+                        Poruwa Ceremony & Reception
+                      </h4>
+                      <p className="text-stone-600/90 text-base sm:text-lg font-serif mb-1">
+                        <span className="font-bold">Time:</span> Poruwa Ceremony commences at 11.04 am, followed by the reception.
+                      </p>
+                      <p className="text-stone-600/90 text-base sm:text-lg font-serif">
+                        <span className="font-bold">Venue:</span> Senuri Grand Castello, Divulapitiya
+                      </p>
+                    </div>
+                  </div>
+
+                  {event === 'both' && (
+                    <>
+                      {/* Date Separator for Homecoming */}
+                      <div className="relative group pt-4">
+                        <div className="absolute top-[calc(50%+8px)] -translate-y-1/2 -left-[64px] sm:-left-[74px] w-12 h-12 bg-white rounded-full border border-brand-beige/40 shadow-lg flex items-center justify-center group-hover:border-brand-beige-deep group-hover:shadow-[0_4px_15px_rgba(176,137,104,0.3)] transition-all duration-500">
+                          <Calendar className="w-5 h-5 text-brand-beige-deep group-hover:scale-110 transition-transform duration-500" />
+                        </div>
+                        <div>
+                          <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-2 group-hover:text-brand-beige-deep transition-colors duration-500">
+                            Date: 24-07-2026
+                          </h4>
+                        </div>
+                      </div>
+
+                      {/* Homecoming Function */}
+                      <div className="relative group">
+                        <div className="absolute top-1/2 -translate-y-1/2 -left-[64px] sm:-left-[74px] w-12 h-12 bg-white rounded-full border border-brand-beige/40 shadow-lg flex items-center justify-center group-hover:border-brand-beige-deep group-hover:shadow-[0_4px_15px_rgba(176,137,104,0.3)] transition-all duration-500">
+                          <Clock className="w-5 h-5 text-brand-beige-deep group-hover:scale-110 transition-transform duration-500" />
+                        </div>
+                        <div>
+                          <h4 className="font-serif text-2xl sm:text-3xl text-stone-800 mb-2 group-hover:text-brand-beige-deep transition-colors duration-500">
+                            Homecoming Function
+                          </h4>
+                          <p className="text-stone-600/90 text-base sm:text-lg font-serif mb-1">
+                            <span className="font-bold">Time:</span> 7pm onwards
+                          </p>
+                          <p className="text-stone-600/90 text-base sm:text-lg font-serif">
+                            <span className="font-bold">Venue:</span> Jetwing Blue, Negombo
+                          </p>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </>
+              )}
             </div>
           </motion.div>
         </div>
@@ -111,9 +177,10 @@ export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both'
             <div className="relative aspect-[3/4] sm:aspect-[4/5] rounded-[2rem] sm:rounded-[3rem] overflow-hidden border-[6px] sm:border-[8px] border-white shadow-[0_20px_50px_rgba(176,137,104,0.2)] bg-white group">
               <img
                 src={isHomecoming ? "/IMG_6942.JPG.jpeg" : "/IMG_6941.JPG.jpeg"}
-                onError={(e) => { 
-                  e.currentTarget.src = "https://images.unsplash.com/photo-1519225421980-715cb02151ff?auto=format&fit=crop&q=80&w=800&h=1000"; 
-                  e.currentTarget.onerror = null; 
+                loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.src = "https://images.unsplash.com/photo-1519225421980-715cb02151ff?auto=format&fit=crop&q=80&w=800&h=1000";
+                  e.currentTarget.onerror = null;
                 }}
                 alt="Ceremony Venue"
                 className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-[1.03]"
@@ -143,12 +210,12 @@ export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both'
                 </div>
                 <div className="flex-1">
                   <h4 className="font-display text-2xl sm:text-4xl text-stone-800 mb-1 sm:mb-2 tracking-tight">Poruwa Ceremony & Reception Function</h4>
-                  <p className="text-stone-500/90 font-serif text-sm sm:text-base leading-relaxed">
+                  <p className="text-stone-500/90 font-serif text-base sm:text-lg leading-relaxed">
                     Poruwa Ceremony commences at 11.04 am, followed by the reception at Senuri Grand Castello, Divulapitiya.
                   </p>
                 </div>
                 <div className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-brand-champagne rounded-full border border-brand-beige/30 shadow-sm self-start sm:self-center flex-shrink-0">
-                  <span className="text-brand-beige-deep font-sans font-bold tracking-[0.1em] sm:tracking-[0.2em] text-[9px] sm:text-[11px] uppercase block drop-shadow-sm">11:04 AM Onwards</span>
+                  <span className="text-brand-beige-deep font-sans font-bold tracking-[0.1em] sm:tracking-[0.2em] text-[10px] sm:text-xs uppercase block drop-shadow-sm">11:04 AM Onwards</span>
                 </div>
               </div>
             </motion.div>
@@ -171,12 +238,12 @@ export const CeremonyDetails: React.FC<CeremonyDetailsProps> = ({ event = 'both'
                 </div>
                 <div className="flex-1">
                   <h4 className="font-display text-2xl sm:text-4xl text-stone-800 mb-1 sm:mb-2 tracking-tight">Homecoming Function</h4>
-                  <p className="text-stone-500/90 font-serif text-sm sm:text-base leading-relaxed">
+                  <p className="text-stone-500/90 font-serif text-base sm:text-lg leading-relaxed">
                     Join us on July 24, 2026, for an elegant evening of celebration at Jetwing Blue, Negombo.
                   </p>
                 </div>
                 <div className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-brand-champagne rounded-full border border-brand-beige/30 shadow-sm self-start sm:self-center flex-shrink-0">
-                  <span className="text-brand-beige-deep font-sans font-bold tracking-[0.1em] sm:tracking-[0.2em] text-[9px] sm:text-[11px] uppercase block drop-shadow-sm">7:00 PM Onwards</span>
+                  <span className="text-brand-beige-deep font-sans font-bold tracking-[0.1em] sm:tracking-[0.2em] text-[10px] sm:text-xs uppercase block drop-shadow-sm">7:00 PM Onwards</span>
                 </div>
               </div>
             </motion.div>

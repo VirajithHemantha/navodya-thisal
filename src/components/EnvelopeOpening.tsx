@@ -7,7 +7,7 @@ export function EnvelopeOpening({ onComplete, onMusicStart, event = 'both' }: { 
     if (opened) {
       const timer = setTimeout(() => {
         onComplete();
-      }, 5000);
+      }, 3500);
       return () => clearTimeout(timer);
     }
   }, [opened, onComplete]);
@@ -456,7 +456,7 @@ export function EnvelopeOpening({ onComplete, onMusicStart, event = 'both' }: { 
             <div className="ribbon-band"></div>
             <div className="bow-center">
               {/* Photorealistic Satin Bow Image */}
-              <img src="/ivory_satin_bow-removebg-preview.png" alt="Satin Bow" className="bow-image" />
+              <img src="/ivory_satin_bow-removebg-preview.png" alt="Satin Bow" loading="eager" className="bow-image" />
             </div>
           </div>
 

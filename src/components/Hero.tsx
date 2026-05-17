@@ -25,6 +25,7 @@ export const Hero: React.FC<HeroProps> = ({ event = 'both' }) => {
         <img
           src="/IMG_6940.JPG.jpeg"
           alt="Navodya and Thisal"
+          loading="eager"
           className="w-full h-full object-cover opacity-95"
           style={{ objectPosition: 'center 20%' }}
         />

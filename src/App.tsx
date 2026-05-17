@@ -91,7 +91,7 @@ export default function App() {
     : new Date("2026-07-22T08:00:00");
 
   return (
-    <div className="font-sans text-stone-800 bg-brand-ivory overflow-hidden selection:bg-brand-beige-deep/20">
+    <div className="font-sans text-stone-800 bg-brand-ivory overflow-x-hidden selection:bg-brand-beige-deep/20">
       <Toaster position="top-center" />
       
       {/* Premium Floating Music Toggle */}
